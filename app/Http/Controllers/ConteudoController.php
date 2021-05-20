@@ -24,10 +24,6 @@ class ConteudoController extends Controller
     {
         $conteudo = Conteudo::find($request->id);
 
-        if ($conteudo == null) {
-            return response()->json(false);
-        }
-
         $conteudo->titulo = $request->titulo;
         $conteudo->descricao = $request->descricao;
         $conteudo->horario = $request->horario;
@@ -35,28 +31,19 @@ class ConteudoController extends Controller
         $conteudo->periodo_id = $request->periodo_id;
         $conteudo->disciplina_id = $request->disciplina_id;
 
-        $conteudo->save();
-
-        return response()->json($conteudo);
+        return $conteudo->save();
     }
 
-    public function delete($id)
+    public function delete(Request $request)
     {
-        $conteudo = Conteudo::find($id);
-        $conteudo->delete();
+        $conteudo = Conteudo::find($request->id);
 
-        return response()->json(true);
+        return $conteudo->delete();
     }
 
     public function find($id = null)
     {
-        $conteudo = Conteudo::find($id);
-
-        if ($conteudo == null) {
-            return response()->json(false);
-        }
-
-        return $conteudo;
+        return Conteudo::findOrFail($id);
     }
 
     public function findAll()
