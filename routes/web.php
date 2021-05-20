@@ -22,7 +22,3 @@ $router->group(['prefix' => 'api'], function ($router) {
     $router->get('/find/{id}', 'ConteudoController@find');
     $router->get('/list', 'ConteudoController@findAll');
 });
-
-$router->get('/key', function () {
-    return \Illuminate\Support\Str::random(32);
-});
