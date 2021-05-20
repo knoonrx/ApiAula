@@ -43,6 +43,11 @@ class ConteudoController extends Controller
     public function delete(Request $request)
     {
         $conteudo = Conteudo::find($request->id);
+        
+        if ($conteudo == null) {
+            return response()->json(false);
+        }
+
         $conteudo->delete();
 
         return response()->json(true);
